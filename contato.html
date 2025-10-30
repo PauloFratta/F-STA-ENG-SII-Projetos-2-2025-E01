@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato</title>
+    <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+
+<body>
+
+    <header>
+        <img id="logo-header" src="./assets/images/Logo.png" alt="Logo Hortomática">
+        <nav>
+            <ul>
+                <li><a href="sobre.html">Sobre</a></li>
+                <li><a href="produtos.html">Produtos</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+    </header>
+
+    <main>
+    <section class="contato">
+        <h2>Entre em Contato com a Hortamática</h2>
+        <p>Quer saber mais sobre nossos kits de hortas inteligentes ou fazer parte do projeto? Envie sua mensagem e
+            entraremos em contato!</p>
+
+        <form class="form-contato" method="post">
+            <div class="campo">
+                <label for="nome">Nome completo</label>
+                <input type="text" id="nome" name="nome" placeholder="Seu nome" required>
+            </div>
+
+            <div class="campo">
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+            </div>
+
+            <div class="campo">
+                <label for="assunto">Assunto</label>
+                <select id="assunto" name="assunto" required>
+                    <option value="">Selecione...</option>
+                    <option value="orcamento">Solicitar orçamento</option>
+                    <option value="parceria">Parceria</option>
+                    <option value="voluntariado">Faça parte</option>
+                    <option value="duvida">Dúvida geral</option>
+                </select>
+            </div>
+
+            <div class="campo">
+                <label for="mensagem">Mensagem</label>
+                <textarea id="mensagem" name="mensagem" rows="5" placeholder="Digite sua mensagem aqui..."
+                    required></textarea>
+            </div>
+
+            <button type="submit" class="btn-enviar">Enviar Mensagem</button>
+        </form>
+
+        <div class="info-contato">
+            <h3>Outras formas de contato</h3>
+            <p><strong>E-mail:</strong> contato@hortamatica.com</p>
+            <p><strong>Telefone:</strong> (11) 99999-9999</p>
+            <p><strong>Endereço:</strong> Rua Verde, 123 — São Paulo, SP</p>
+
+            <h4>Siga a Hortamática</h4>
+            <ul class="redes-sociais">
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">Facebook</a></li>
+                <li><a href="#">LinkedIn</a></li>
+            </ul>
+        </div>
+    </section>
+    </main>
+</body>
+
+</html>
