@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Ícone da aba do navegador -->
+  <link rel="icon" type="image/x-icon" href="../assets/images/Group 1.png" />
+
+  <!-- Arquivo CSS externo para estilização -->
+  <link rel="stylesheet" type="text/css" href="../css/style.css" />
+
+  <!-- FontAwesome (ícones) -->
+  <script src="https://kit.fontawesome.com/83ccd457ed.js" crossorigin="anonymous"></script>
+
+  <title>Emplink</title>
+
+  <!-- Pequenos estilos necessários para modal e animação do coração -->
+  <style>
+    /* Modal de story */
+    .story-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.85);
+      z-index: 9999;
+      padding: 20px;
+    }
+
+    .story-modal .story-view {
+      max-width: 920px;
+      max-height: 90vh;
+      width: 100%;
+      border-radius: 12px;
+      overflow: hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+    }
+
+    .story-modal img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 8px;
+    }
+
+    .story-modal .close-x {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      color: #fff;
+      font-size: 20px;
+      cursor: pointer;
+      background: rgba(0,0,0,0.35);
+      border-radius: 6px;
+      padding: 6px 8px;
+    }
+
+    /* Like button base */
+    .like-btn {
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      font-size: 22px;
+      padding: 4px;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .like-btn .fa-heart {
+      transition: transform .15s ease, color .15s ease;
+      color: #ffffff; /* cor padrão */
+      text-shadow: 0 0 6px rgba(0,0,0,0.6);
+    }
+
+    .like-btn.liked .fa-heart {
+      color: #e74c3c; /* vermelho */
+      transform: scale(1.12);
+      text-shadow: 0 0 12px rgba(231,76,60,0.35);
+    }
+
+    /* Coração flutuante (criado dinamicamente) */
+    @keyframes heartFloat {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      40% { transform: translateY(-24px) scale(1.3); opacity: 1; }
+      100% { transform: translateY(-90px) scale(0.8); opacity: 0; }
+    }
+
+    .floating-heart {
+      position: absolute;
+      pointer-events: none;
+      font-size: 48px;
+      color: #e74c3c;
+      transform-origin: center;
+      animation: heartFloat 700ms ease forwards;
+      z-index: 1000;
+      text-shadow: 0 6px 18px rgba(0,0,0,0.5);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navbar para desktop -->
+  <nav class="navbar">
+    <div class="navbar-wrapper">
+      <img src="../assets/images/logoatualizada.png" alt="EngFlow logo" class="logo" />
+      <input type="text" class="search" placeholder="Search" />
+      <div class="nav-items">
+        <a href="index.html"><img src="../assets/images/nav-items/home.PNG" class="icons" alt="Home Icon" /></a>
+        <a href="message.html"><img src="../assets/images/nav-items/messenger.PNG" class="icons" alt="Messenger Icon" /></a>
+        <img src="../assets/images/nav-items/explore.PNG" class="icons" alt="Explore Icon" />
+        <img src="../assets/images/nav-items/like.PNG" class="icons" alt="Like Icon" />
+        <a href="perfil.html">
+          <img src="../assets/images/principal.png" class="icons user-account" alt="User Profile" />
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Navbar superior para mobile -->
+  <nav class="navbar-mobile-top">
+    <div class="navbar-wrapper">
+      <img src="../assets/images/Group 1.png" alt="EngFlow logo" class="logo" />
+      <input type="text" class="search" placeholder="Search" />
+      <div class="nav-items">
+        <img src="../assets/images/nav-items/add.PNG" class="icons" alt="Add Icon" />
+        <img src="../assets/images/nav-items/like.PNG" class="icons" alt="Like Icon" />
+        <img src="../assets/images/principal.png" class="icons" alt="Messenger Icon" />
+      </div>
+    </div>
+  </nav>
+
+  <!-- Navbar inferior para mobile -->
+  <nav class="navbar-mobile-bottom">
+    <div class="navbar-wrapper">
+      <div class="nav-items">
+        <img src="../assets/images/nav-items/home.PNG" class="icons" alt="Home Icon" />
+        <img src="../assets/images/nav-items/send.PNG" class="icons" alt="Send Icon" />
+        <img src="../assets/images/nav-items/explore.PNG" class="icons" alt="Explore Icon" />
+        <img src="../assets/images/nav-items/comment.PNG" class="icons" alt="Comment Icon" />
+        <img src="../assets/images/principal.png" class="icons" alt="User Icon" />
+      </div>
+    </div>
+  </nav>
+
+  <!-- Seção principal -->
+  <section class="main">
+    <div class="wrapper">
+
+      <!-- Coluna da esquerda: stories e posts -->
+      <div class="left-col">
+
+        <!-- Área dos stories -->
+        <div class="status-wrapper">
+          <button class="story--scroll" id="scroll-left" aria-label="Scroll stories left">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="story--scroll" id="scroll-right" aria-label="Scroll stories right">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+
+          <div class="stories">
+            <div class="status-card">
+              <div class="status-pic">
+                <img src="../assets/images/ChatGPT Image 16 de jun. de 2025, 00_49_12.png" alt="Story that.suman" />
+              </div>
+              <p class="username">joao_do_bairro</p>
+            </div>
+            <!-- Outros stories omitidos -->
+            <div class="status-card">
+              <div class="status-pic">
+                <img src="../assets/images/estudante.png" alt="Story geeks_for_g..." />
+              </div>
+              <p class="username">solange_pereira</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post -->
+        <div class="post" data-post-id="1">
+          <div class="info">
+            <div class="user">
+              <div class="status-pic">
+                <img src="../assets/images/estudante.png" alt="Profile Image" />
+              </div>
+              <p class="username">solange_pereira</p>
+            </div>
+            <img src="../assets/images/nav-items/option.PNG" class="options" alt="Options" />
+          </div>
+
+          <img src="../assets/images/padaria_oportunidade.jpeg" class="post-image" alt="Geeks for Geeks post" />
+
+          <div class="post-content">
+            <div class="reaction-wrapper">
+              <!-- Botão de curtir com FontAwesome -->
+              <button class="like-btn" aria-label="Curtir" title="Curtir">
+                <i class="far fa-heart"></i>
+              </button>
+
+              <img src="../assets/images/nav-items/comment.PNG" class="icons" alt="Comment" />
+              <img src="../assets/images/nav-items/send.PNG" class="icons" alt="Send" />
+              <img src="../assets/images/nav-items/save.PNG" class="save icons" alt="Save" />
+            </div>
+            <p class="likes">215 likes</p>
+            <p class="description">
+              <span>solange_pereira</span><br>
+                    📢 Oportunidade de Emprego! 🍞✨<br> Estamos em busca de padeira dedicada e apaixonada por panificação para fazer parte da nossa equipe! 💼
+                    Se você tem experiência na produção de pães, bolos e salgados, essa vaga é para você. <br> <br>📍 Local: Padaria no bairro Jardim <br>⏰ Horário: A combinar <br>💰 Salário: Será informado na entrevista <br><br>
+                    Interessadas, envie uma mensagem no WhatsApp: 4002-8922 <br>
+                    Venha crescer com a gente e fazer parte de uma equipe que ama o que faz! 🥐❤️
+
+            </p>
+            <p class="no-comments">View all 45 comments</p>
+            <p class="post-time">2 DAYS AGO</p>
+          </div>
+
+        </div> <!-- fim post 1 -->
+
+        <!-- Post -->
+        <div class="post" data-post-id="2">
+          <div class="info">
+            <div class="user">
+              <div class="status-pic">
+                <img src="../assets/images/ChatGPT Image 16 de jun. de 2025, 00_49_12.png" alt="Profile Image" />
+              </div>
+              <p class="username">joao_do_bairro</p>
+            </div>
+            <img src="../assets/images/nav-items/option.PNG" class="options" alt="Options" />
+          </div>
+
+          <img src="../assets/images/panificador.png" class="post-image" alt="Geeks for Geeks post" />
+
+          <div class="post-content">
+            <div class="reaction-wrapper">
+              <!-- Botão de curtir -->
+              <button class="like-btn" aria-label="Curtir" title="Curtir">
+                <i class="far fa-heart"></i>
+              </button>
+
+              <img src="../assets/images/nav-items/comment.PNG" class="icons" alt="Comment" />
+              <img src="../assets/images/nav-items/send.PNG" class="icons" alt="Send" />
+              <img src="../assets/images/nav-items/save.PNG" class="save icons" alt="Save" />
+            </div>
+            <p class="likes">12 likes</p>
+            <p class="description">
+              <span>joao_do_bairro</span> <br>🥖 Feliz Dia do Padeiro! 🥖✨<br><br>
+              Hoje é dia de celebrar esses profissionais que acordam cedo todos os dias para levar sabor e carinho para nossas mesas. ❤️<br>
+              Parabéns a todos os padeiros que, com dedicação e amor, transformam simples ingredientes em momentos especiais. 🍞☕<br>
+              Um agradecimento especial aos que fazem parte da nossa história e do nosso bairro. Vocês fazem a diferença! 🙌<br><br>
+
+              #DiaDoPadeiro #Panificação #Gratidão
+            </p>
+            <p class="no-comments">View all 10 comments</p>
+            <p class="post-time">5 DAYS AGO</p>
+          </div>
+
+          <div class="comment-wrapper">
+            <img src="../assets/images/nav-items/smile.PNG" class="icons" alt="Smile icon" />
+            <input type="text" class="comment-box" placeholder="Adicionar comentário..." />
+            <button class="comment-btn">Post</button>
+          </div>
+        </div> <!-- fim post 2 -->
+
+      </div> <!-- Fim da coluna esquerda -->
+
+    </div> <!-- Fim do wrapper -->
+  </section>
+
+  <!-- Modal de story (invisível até abrir) -->
+  <div class="story-modal" id="storyModal" aria-hidden="true">
+    <div class="story-view" role="dialog" aria-modal="true">
+      <span class="close-x" id="closeStory">✕</span>
+      <img src="" alt="Story view" id="storyModalImg" />
+    </div>
+  </div>
+
+  <!-- Script para rolagem dos stories e interações -->
+  <script>
+    // STORIES SCROLL (seu script original, mantido)
+    const storiesContainer = document.querySelector(".stories");
+    const scrollLeftBtn = document.getElementById("scroll-left");
+    const scrollRightBtn = document.getElementById("scroll-right");
+    const scrollStep = 320;
+
+    function updateScrollButtons() {
+      if (!storiesContainer) return;
+      scrollLeftBtn.style.opacity = storiesContainer.scrollLeft > 0 ? '1' : '0';
+      scrollRightBtn.style.opacity =
+        storiesContainer.scrollLeft + storiesContainer.clientWidth < storiesContainer.scrollWidth ? '1' : '0';
+    }
+
+    function scrollStories(direction) {
+      storiesContainer.scrollBy({
+        left: direction * scrollStep,
+        behavior: 'smooth'
+      });
+    }
+
+    scrollLeftBtn.addEventListener("click", () => scrollStories(-1));
+    scrollRightBtn.addEventListener("click", () => scrollStories(1));
+    storiesContainer.addEventListener("scroll", updateScrollButtons);
+    updateScrollButtons();
+
+    // --- Curtir com coração vermelho + contador + animação de float ---
+    function parseLikesText(text) {
+      // extrai número de likes (assume formato "215 likes" ou "1 like")
+      const m = text.match(/(\d+)/);
+      return m ? Number(m[1]) : 0;
+    }
+
+    function setLikesText(el, count) {
+      el.textContent = `${count} like${count !== 1 ? 's' : ''}`;
+    }
+
+    function createFloatingHeart(x, y, parent) {
+      const heart = document.createElement('i');
+      heart.className = 'fas fa-heart floating-heart';
+      heart.style.left = `${x - 24}px`;
+      heart.style.top = `${y - 24}px`;
+      parent.appendChild(heart);
+      // remove depois da animação
+      setTimeout(() => heart.remove(), 800);
+    }
+
+    document.querySelectorAll('.post').forEach(post => {
+      const likeBtn = post.querySelector('.like-btn');
+      const likesEl = post.querySelector('.likes');
+      const postImg = post.querySelector('.post-image');
+
+      if (!likeBtn || !likesEl) return;
+
+      // clique no botão de curtir
+      likeBtn.addEventListener('click', (e) => {
+        const isLiked = likeBtn.classList.contains('liked');
+        let count = parseLikesText(likesEl.textContent);
+
+        if (isLiked) {
+          // descurtir
+          likeBtn.classList.remove('liked');
+          likeBtn.querySelector('i').classList.remove('fas');
+          likeBtn.querySelector('i').classList.add('far');
+          count = Math.max(0, count - 1);
+        } else {
+          // curtir
+          likeBtn.classList.add('liked');
+          likeBtn.querySelector('i').classList.remove('far');
+          likeBtn.querySelector('i').classList.add('fas');
+          count = count + 1;
+
+          // animação do coração flutuante: posicionar sobre a imagem do post (centro)
+          const rect = postImg.getBoundingClientRect();
+          const x = rect.left + rect.width / 2;
+          const y = rect.top + rect.height / 2;
+          createFloatingHeart(x, y, document.body);
+        }
+
+        setLikesText(likesEl, count);
+      });
+
+      // duplo clique na imagem curte também (como Instagram)
+      postImg.addEventListener('dblclick', (ev) => {
+        if (!likeBtn.classList.contains('liked')) {
+          likeBtn.click(); // reutiliza o handler acima
+        } else {
+          // já curtido, apenas anima o coração menor
+          const rect = postImg.getBoundingClientRect();
+          const x = ev.clientX;
+          const y = ev.clientY;
+          createFloatingHeart(x, y, document.body);
+        }
+      });
+
+      // acessibilidade: tecla Enter no botão
+      likeBtn.addEventListener('keydown', (ev) => {
+        if (ev.key === 'Enter' || ev.key === ' ') {
+          ev.preventDefault();
+          likeBtn.click();
+        }
+      });
+
+    });
+
+    // --- Stories: abrir modal ao clicar ---
+    const storyModal = document.getElementById('storyModal');
+    const storyModalImg = document.getElementById('storyModalImg');
+    const closeStory = document.getElementById('closeStory');
+
+    document.querySelectorAll('.status-card .status-pic img').forEach(img => {
+      img.style.cursor = 'pointer';
+      img.addEventListener('click', () => {
+        storyModalImg.src = img.src;
+        storyModal.style.display = 'flex';
+        storyModal.setAttribute('aria-hidden', 'false');
+      });
+    });
+
+    function closeStoryModal() {
+      storyModal.style.display = 'none';
+      storyModal.setAttribute('aria-hidden', 'true');
+      storyModalImg.src = '';
+    }
+
+    closeStory.addEventListener('click', closeStoryModal);
+    storyModal.addEventListener('click', (e) => {
+      // fechar ao clicar fora da imagem (ou no background)
+      if (e.target === storyModal || e.target === closeStory) closeStoryModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && storyModal.style.display === 'flex') closeStoryModal();
+    });
+
+    // --- Comentários simples: limpa o input e consome o valor (placeholder de integração) ---
+    document.querySelectorAll('.comment-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const wrapper = e.currentTarget.closest('.comment-wrapper');
+        if (!wrapper) return;
+        const input = wrapper.querySelector('.comment-box');
+        if (!input) return;
+        const text = input.value.trim();
+        if (!text) return;
+        // exemplo: log (substituir por envio real ao backend)
+        console.log('Comentário postado:', text);
+        input.value = '';
+      });
+    });
+  </script>
+</body>
+
+</html>

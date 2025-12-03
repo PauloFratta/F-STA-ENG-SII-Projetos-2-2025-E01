@@ -1,0 +1,775 @@
+/* Cores padrões */
+:root {
+  --main-color: #6E33CC;
+  --houver-color: #371A66;
+  --body-color: #B4EDD2;
+  --preto-assustador: #171717;
+  --preto-mais-claro: #2C2C2C;
+  --preto-um-pouco-mais-claro: #7e7e7e;
+  --text-color: #ffffff;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+*:focus {
+  outline: none;
+}
+
+body {
+  width: 100%;
+  background-color: var(--preto-mais-claro);
+  position: relative;
+  font-family: BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* Barra de navegação */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 59px;
+  background-color: var(--preto-assustador);
+  border-bottom: 1px solid var(--preto-assustador);
+  display: flex;
+  justify-content: center;
+  padding: 5px 0;
+}
+
+.navbar-wrapper {
+  width: 70%;
+  max-width: 1000px;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  height: 85%;
+  margin-top: 5px;
+  cursor: pointer;
+}
+
+.search {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 267px;
+  height: 36px;
+  background-color: var(--preto-mais-claro);
+  border: none;
+  border-radius: 7px;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 16px;
+  padding-left: 15px;
+}
+
+.nav-items {
+  height: 24px;
+  position: relative;
+}
+
+.icons {
+  height: 100%;
+  cursor: pointer;
+  margin: 0 10px;
+  display: inline-block;
+}
+
+.user-accoount {
+  width: 23px;
+  border-radius: 50%;
+  background-image: url(assets/images/nav-items/user.png);
+  background-size: cover;
+}
+
+.icons.user-account {
+  width: 23px;       /* define largura */
+  height: 23px;      /* define altura para manter formato quadrado */
+  border-radius: 50%; /* deixa redondo */
+  cursor: pointer;
+  display: inline-block;
+  object-fit: cover;  /* para a imagem preencher o espaço e manter proporção */
+  margin: 0 10px;
+}
+.main {
+  width: 100%;
+  padding: 40px 0;
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
+
+/* ⬇️ Atualizado aqui */
+/* Wrapper maior para suportar largura aumentada */
+.wrapper {
+  width: 80%; /* Aumentei de 70% para 80% para dar mais espaço */
+  max-width: 1200px; /* Também aumentei max-width */
+  display: flex;
+  justify-content: center;
+}
+
+/* Aumentei a largura da coluna esquerda para stories e posts */
+.left-col {
+  display: flex;
+  flex-direction: column;
+  width: 720px; /* antes não tinha largura, agora maior */
+}
+
+/* Ajustando o wrapper dos stories para caber cards maiores */
+.status-wrapper {
+  width: 100%;
+  height: 140px; /* Aumentei a altura para mais espaço vertical */
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background: var(--preto-assustador);
+  border: 1px solid var(--preto-assustador);
+  border-radius: 8px;
+  padding: 10px 15px; /* um pouco mais de padding */
+  overflow: hidden;
+}
+
+/* Stories em linha, animando a posição */
+.stories {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  position: absolute;
+  left: 0;
+  transition: 0.5s all ease-out;
+}
+
+/* Scroll buttons */
+.status-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.story--scroll {
+  background-color: var(--preto-mais-claro);
+  color: #fff;
+  padding: 7px 10px; /* um pouco maior */
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 0 10px #999;
+  z-index: 1;
+  margin: 0px 8px;
+  transition: 0.7s;
+}
+
+/* Cartão do story maior */
+.status-card {
+  flex: 0 0 auto;
+  width: 110px; /* aumentei de 80px */
+  max-width: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px; /* mais espaço entre cards */
+}
+
+/* Imagem do story maior */
+.status-pic {
+  width: 90px; /* antes 70px */
+  height: 90px; /* antes 70px */
+  border-radius: 50%;
+  overflow: hidden;
+  padding: 2px;
+  background: linear-gradient(45deg, #6c63ff, #b3cde0 80%);
+}
+.status-pic img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--main-color);
+  cursor: pointer;
+}
+
+/* Nome de usuário com fonte um pouco maior */
+.username {
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+  font-size: 14px; /* antes 12px */
+  margin-top: 7px; /* mais espaçamento */
+  color: #fff;
+}
+
+/* Posts maiores e mais largos */
+.post {
+  width: 100%; /* ocupa toda a largura da coluna */
+  background: var(--preto-assustador);
+  border: 1px solid var(--preto-mais-claro);
+  margin-top: 24px; /* espaço maior entre posts */
+  border-radius: 8px;
+  max-width: 720px; /* limite de largura igual à coluna */
+}
+
+/* Informações do post com mais padding horizontal */
+.info {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px; /* um pouco mais de padding */
+}
+
+.info .username {
+  width: auto;
+  font-weight: bold;
+  color: #fff;
+  font-size: 16px; /* fonte maior */
+  margin-left: 10px;
+}
+
+.info .options {
+  height: 12px; /* ícone de opções maior */
+  cursor: pointer;
+}
+
+.info .user {
+  display: flex;
+  align-items: center;
+}
+
+.info .status-pic {
+  height: 48px; /* maior que antes (40px) */
+  width: 48px;
+  padding: 0;
+  background: none;
+}
+
+.info .status-pic img {
+  border: none;
+}
+
+/* Imagem do post maior */
+.post-image {
+  width: 100%;
+  height: 550px; /* antes 500px */
+  object-fit: cover;
+  border-radius: 0 0 8px 8px; /* arredondar só cantos de baixo */
+}
+
+/* Conteúdo do post com padding */
+.post-content {
+  width: 100%;
+  padding: 22px 25px; /* um pouco maior */
+}
+
+.likes {
+  font-weight: bold;
+  color: var(--text-color);
+}
+
+.description {
+  margin: 10px 0;
+  font-size: 15px; /* fonte maior */
+  line-height: 22px; /* mais espaçamento */
+  color: var(--text-color);
+}
+
+.description span {
+  font-weight: bold;
+  margin-right: 10px;
+  color: var(--text-color);
+}
+
+.no-comments {
+  color: var(--preto-um-pouco-mais-claro);
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.post-time {
+  color: var(--preto-um-pouco-mais-claro);
+  font-size: 11px;
+  margin-bottom: auto;
+}
+
+.comment-wrapper {
+  width: 100%;
+  height: 45px; /* maior */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+}
+
+.comment-wrapper .icons {
+  height: 28px; /* maior */
+  margin: 10px;
+}
+
+.comment-box {
+  width: 80%;
+  height: 100%;
+  border: none;
+  padding-left: 15px;
+  border-radius: 7px;
+  background-color: var(--preto-mais-claro);
+  font-size: 15px; /* fonte maior */
+}
+
+.comment-btn,
+.action-btn,
+.seeall-btn {
+  height: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 17px; /* fonte maior */
+  font-weight: 400;
+  color: #fff;
+  font-weight: bold;
+}
+
+.comment-btn {
+  padding-right: 1.3rem;
+}
+
+.reaction-wrapper {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  margin-top: -20px;
+  align-items: center;
+}
+
+.reaction-wrapper .icons {
+  height: 25px;
+  margin: 0;
+  margin-right: 20px;
+}
+
+.reaction-wrapper .icons.save {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.navbar-mobile-top {
+  display: none;
+}
+.navbar-mobile-bottom {
+  display: none;
+}
+
+.quick-links-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 5px;
+}
+.quick-links-wrapper .quick-link {
+  font-size: 13px;
+  color: #c2c0c0;
+  cursor: pointer;
+}
+.quick-links-wrapper .quick-link::after {
+  margin-right: 5px;
+  margin-left: 5px;
+  content: ".";
+}
+
+/* Responsivo */
+@media (max-width: 1100px) {
+  .right-col,
+  .search {
+    display: none;
+  }
+  .navbar-wrapper,
+  .wrapper {
+    width: 90%;
+  }
+  .wrapper {
+    display: block;
+  }
+  .navbar-mobile-top {
+    display: none;
+  }
+  .navbar-mobile-bottom {
+    display: none;
+  }
+
+  /* Ajuste na largura da coluna esquerda */
+  .left-col {
+    width: 100%; /* para mobile médio, ocupa 100% */
+  }
+
+  /* Ajuste para post e stories */
+  .post {
+    max-width: 100%;
+  }
+  .status-card {
+    width: 90px;
+    max-width: 90px;
+  }
+  .status-pic {
+    width: 75px;
+    height: 75px;
+  }
+  .username {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 550px) {
+  .navbar {
+    display: none;
+  }
+
+  .navbar-mobile-top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 59px;
+    background-color: var(--preto-mais-claro);
+    border-bottom: 1px solid var(--preto-um-pouco-mais-claro);
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+  }
+
+  .navbar-mobile-bottom {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 59px;
+    background-color: #000000;
+    border-top: 1px solid var(--preto-mais-claro);
+    display: flex;
+    justify-content: center;
+    padding: 5px 0;
+  }
+
+  .navbar-mobile-bottom .navbar-wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .navbar-mobile-bottom .navbar-wrapper .nav-items {
+    gap: 42px;
+  }
+
+  .nav-items,
+  .icons {
+    margin: 2px;
+  }
+  .nav-items {
+    display: flex;
+    gap: 32px;
+  }
+  .post-image {
+    height: 300px;
+  }
+
+  /* Para telas muito pequenas, deixa coluna e posts 100% */
+  .left-col {
+    width: 100%;
+  }
+  .post {
+    max-width: 100%;
+  }
+  .status-card {
+    width: 75px;
+    max-width: 75px;
+  }
+  .status-pic {
+    width: 60px;
+    height: 60px;
+  }
+  .username {
+    font-size: 11px;
+  }
+}
+
+.pointpoint {
+  cursor: pointer;
+}
+
+/* --- Rodapé fixo --- */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--preto-assustador);
+  border-top: 1px solid var(--preto-mais-claro);
+  padding: 10px 0;
+  color: #c2c0c0;
+  font-size: 13px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  z-index: 1000;
+}
+
+.footer .quick-links-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 0;
+}
+
+.footer .quick-link {
+  cursor: pointer;
+  color: #c2c0c0;
+  user-select: none;
+}
+
+.footer .quick-link::after {
+  content: ".";
+  margin: 0 5px;
+}
+
+.footer .quick-links-wrapper:last-child .quick-link::after {
+  content: "";
+  margin: 0;
+}
+
+* {
+    border: none;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--preto-mais-claro);
+}
+
+main {
+    height: 100vh;
+    margin: auto;
+    max-width: 935px;
+}
+
+a { text-decoration: none; }
+h1 { margin: 20px 0; }
+ul { list-style: none; }
+
+/**
+ * Flex rules
+ */
+
+.flex {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.direction-column {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -moz-box-direction: normal;
+    -moz-box-orient: vertical;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.justify-content-center {
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
+.panel.register p {
+    color: var(--text-color);
+}
+
+.align-items-center {
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    align-items: center;
+}
+
+.flex-wrap {
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+h1 img {
+    width: 206px;
+    height: 58px;
+    object-fit: contain; /* ou 'cover' dependendo do efeito que você quiser */
+  }
+
+/**
+ *
+ */
+
+.panel {
+    background-color: var(--preto-assustador);
+    border-image: linear-gradient(45deg, var(--main-color), var(--body-color) 80%);
+    border-image-slice: 1;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 8px;
+    overflow: hidden; /* Garante que o conteúdo não ultrapasse os cantos arredondados */
+    border: 1px solid /* Caso você ainda queira borda */
+}
+
+#auth { max-width: 350px; }
+#mobile { max-width: 454px; }
+
+#mobile img {
+    height: 618px;
+}
+
+/**
+ * Login section
+ */
+.login-with-fb,
+form { width: 100%; }
+
+.register,
+form { padding: 30px 20px; }
+
+.login-with-fb { padding: 30px 20px 20px 20px; }
+
+form .sr-only { display: none; }
+
+form input {
+    background-color:var(--preto-mais-claro);
+    border: 1px solid;
+    border-radius: 3px;
+    color: var(--preto-um-pouco-mais-claro);
+    margin-bottom: 8px;
+    padding: 10px 10px;
+    width: 100%;
+}
+
+form input:hover {
+    border: 1px solid #FFFFFF;
+}
+
+form input::placeholder {
+    color: #808080;
+}
+
+form input:focus {
+    border: 1px solid #808080;
+    outline: none;
+}
+
+form button {
+    background-color: var(--houver-color);
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    height: 35px;
+    margin-top: 10px;
+    width: 100%;
+}
+
+form button:hover {
+    background-color: var(--houver-color);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.15);
+    transform: translateY(-1px);
+}
+
+form button:active {
+    transform: translateY(1);
+    box-shadow: 0 0 4px rgba(255, 255, 255, 0.1);
+}
+
+/**
+ * Separator login form from login with fb
+ */
+.separator span {
+    background-color: #dbdbdb;
+    height: 1px;
+    width: calc(100% - 10px);
+}
+
+.separator .or {
+    color: #808080;
+    font-weight: bold;
+}
+
+.separator { padding: 0 20px; }
+.separator span:first-child { margin-right: 10px;}
+.separator span:last-child { margin-left: 10px;}
+
+/**
+ * Login with fb section
+ */
+.login-with-fb a { 
+    color: var(--text-color); 
+}
+
+.login-with-fb > a { font-size: 12px; }
+.login-with-fb div a { font-weight: bold; }
+.login-with-fb div { margin-bottom: 15px; }
+
+/**
+ * Register section
+ */
+.register * { font-size: 14px; }
+.register a { 
+    color: var(--main-color);
+    font-weight: bold;
+}
+
+.register p { margin-right: 5px; }
+
+/**
+ * App download
+ */
+.app-download { padding: 15px; }
+.app-download p { padding: 10px 0; }
+.app-download img { 
+    height: 40px; 
+    margin: 0 5px;
+}
+
+/**
+ * Footer
+ */
+footer {
+    margin: 0 auto 30px auto;
+    max-width: 935px;
+}
+footer ul { margin-bottom: 20px; }
+footer ul li { margin: 0 10px 10px; } 
+footer ul li a { color: #385185; }
+footer .copyright { color: #808080; }
+footer ul li a,
+footer .copyright { 
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+ }
+
+
+/**
+ * Media queries
+ */
+
+@media screen and (max-width: 767px) {
+    main { margin: 30px auto 50px auto; }
+    footer .copyright,
+    footer ul li a { font-size: 13px; }
+}

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="icon" type="image/x-icon" href="../assets/images/Group 1.png" />
+    <title>Profile | Emplink</title>
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="../css/perfil.css" />
+  </head>
+
+  <body>
+    <div class="header__wrapper">
+      <header></header>
+
+      <div class="cols__container">
+
+        <!-- LEFT COLUMN -->
+        <div class="left__col">
+
+          <!-- FOTO DE PERFIL COM UPLOAD -->
+          <div class="img__container" style="cursor: pointer; position: absolute; top: -60px; left: 50%; transform: translateX(-50%);">
+            <img
+              id="profilePic"
+              src="../img/user2.jpeg"
+              alt="Foto de Perfil"
+              style="
+                width: 120px;
+                height: 120px;
+                object-fit: cover;
+                border-radius: 50%;
+                border: 4px solid white;
+                box-shadow: 1px 3px 12px rgba(0, 0, 0, 0.18);
+              "
+            />
+            <span style="
+              position: absolute;
+              background: #2afa6a;
+              width: 16px;
+              height: 16px;
+              border-radius: 50%;
+              bottom: 3px;
+              right: 11px;
+              border: 2px solid #fff;
+            "></span>
+
+            <input type="file" id="fileInput" accept="image/*" style="display:none;">
+          </div>
+
+          <h2>Daniel Miller</h2>
+          <p>Padeiro | Gastronomia</p>
+          <p>daniel_miller</p>
+
+          <ul class="about">
+            <li><span>4,073</span>Followers</li>
+            <li><span>322</span>Following</li>
+            <li><span>200,543</span>Attraction</li>
+          </ul>
+
+          <div class="content">
+            <p>
+              Sou padeiro com experiência na produção de pães e salgados,
+              buscando oportunidade de trabalho no bairro.
+            </p>
+
+            <ul>
+              <li><i class="fab fa-twitter"></i></li>
+              <li><i class="fab fa-instagram"></i></li>
+              <li><i class="fab fa-facebook"></i></li>
+              <li><i class="fab fa-github"></i></li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!-- RIGHT COLUMN -->
+        <div class="right__col">
+
+          <nav>
+            <ul>
+              <li><a href="">posts</a></li>
+              <li><a href="">resume</a></li>
+              <li><a href="">about</a></li>
+            </ul>
+
+            <button onclick="location.href='../php/login.php'">Exit</button>
+          </nav>
+
+          <div class="photos">
+            <img src="../assets/images/pao.webp" alt="Photo" />
+            <img src="../assets/images/padaria.jpg" alt="Photo" />
+            <img src="../assets/images/gastro.jpg" alt="Photo" />
+            <img src="../assets/images/paes.jpeg" alt="Photo" />
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- SCRIPT PARA TROCAR FOTO -->
+    <script>
+      const profilePic = document.getElementById("profilePic");
+      const fileInput = document.getElementById("fileInput");
+
+      profilePic.addEventListener("click", () => {
+        fileInput.click();
+      });
+
+      fileInput.addEventListener("change", (event) => {
+        const file = event.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            profilePic.src = e.target.result;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    </script>
+
+  </body>
+</html>
